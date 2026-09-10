@@ -1,4 +1,4 @@
-"""Paper-aligned episode-relative + context-relative TRCA advantage."""
+"""Paper-aligned episode-relative and context-relative TRCA advantage."""
 
 from __future__ import annotations
 

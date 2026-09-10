@@ -21,7 +21,7 @@ This checklist separates method-level requirements from acceptable engineering d
    - Fusion is `(1-lambda) * rF + lambda * rB`, default `lambda=0.8`; no legacy terminal anchor in this path.
 
 4. **Paper-level return and Advantage**
-   - Code: `gigpo/core_trca.py`, `verl/trainer/ppo/ray_trainer.py`.
+   - Code: `trca/advantage.py`, `verl/trainer/ppo/ray_trainer.py`.
    - Return combines binary terminal outcome with TRCA transition reward at `gamma=0.95`.
    - Final Advantage is the unweighted sum of episode-relative and context-relative normalized terms.
    - Context equality uses the complete normalized observable state, avoiding false equivalence from heuristic summaries.

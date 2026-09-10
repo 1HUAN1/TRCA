@@ -8,7 +8,7 @@ This copy implements the method in *TRCA: Transition-wise Rubric Credit Assignme
 - `trca/binding.py`: deterministic task-conditioned binding. SearchQA ground-truth answers and aliases are explicitly removed.
 - `trca/facts.py` and `trca/evaluator.py`: allowlisted canonical observable facts and deterministic Boolean evaluation. Missing/unknown evidence returns 0, including under `not` and `falsy`; no online LLM judge is used.
 - `trca/rewards.py`: Foundational reward, first-coverage Breakthrough reward, and `(1-lambda) rF + lambda rB`. Invalidity is negative in Foundational and excluded from Breakthrough.
-- `gigpo/core_trca.py`: discounted return over the binary terminal outcome plus `trca_reward`, episode-relative outcome advantage, context-relative return advantage, and their unweighted sum. Exact normalized observable state is used as the conservative context key.
+- `trca/advantage.py`: discounted return over the binary terminal outcome plus `trca_reward`, episode-relative outcome advantage, context-relative return advantage, and their unweighted sum. Exact normalized observable state is used as the conservative context key.
 - `trca/action_mask.py`: only content inside complete `<action>`, `<search>`, or `<answer>` spans is trainable/credited. Think blocks, tags, prompts, observations, retrieved content, padding, and malformed/unclosed spans are zero-masked. The same mask is copied into the multi-turn actor loss mask.
 
 The TRCA path does not add a terminal anchor to rubric reward, does not clip negative Invalidity reward, and does not separately mix environment and rubric advantages.

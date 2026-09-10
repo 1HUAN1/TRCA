@@ -117,7 +117,7 @@ def test_compute_rewards_for_batch_writes_step_rewards_and_dump(tmp_path):
 
 
 def test_core_dispatch_decodes_responses_for_fcsr_actions():
-    from rewardflow.core_rewardflow import _decode_fcsr_step_outputs
+    from reward_methods.rollout import decode_rollout_text
 
     class Tok:
         def decode(self, response, skip_special_tokens=True):
@@ -125,14 +125,14 @@ def test_core_dispatch_decodes_responses_for_fcsr_actions():
             return "<action>open drawer 1</action>"
 
     batch = [[{"raw_prompt": [{"role": "user", "content": "Question: Who wrote Hamlet?"}], "responses": [1, 2, 3]}]]
-    errors = _decode_fcsr_step_outputs(batch, Tok())
+    errors = decode_rollout_text(batch, Tok())
     assert errors == 0
     assert batch[0][0]["input"] == "Question: Who wrote Hamlet?"
     assert batch[0][0]["output"] == "<action>open drawer 1</action>"
 
 
 def test_search_dispatch_uses_real_rollout_shape_for_nonzero_first_retrieval_reward():
-    from rewardflow.core_rewardflow import apply_rewardflow_propagation
+    from reward_methods.rollout import apply_configured_rewards
 
     class Tok:
         def decode(self, response, skip_special_tokens=True):
@@ -161,7 +161,7 @@ def test_search_dispatch_uses_real_rollout_shape_for_nonzero_first_retrieval_rew
         "is_action_valid": True,
     }]]
 
-    updated, metrics = apply_rewardflow_propagation(batch, Cfg(), Tok(), envs=None, return_metrics=True)
+    updated, metrics = apply_configured_rewards(batch, Cfg(), Tok())
     assert updated[0][0]["fcsr_reward_components"]["dcsr_reward"] > 0.0
     assert metrics["fcsr/dcsr_mean"] > 0.0
     assert metrics["fcsr/decode_error_count"] == 0.0

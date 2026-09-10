@@ -67,7 +67,8 @@ from verl.trainer.ppo.validation_trajectory_dump import (
     validate_validation_trajectory_metrics,
 )
 from verl.workers.rollout.async_server import AsyncLLMServerManager
-from gigpo import core_fcsr_gigpo, core_gigpo, core_trca
+from gigpo import core_fcsr_gigpo, core_gigpo
+from trca import advantage as trca_advantage
 
 from agent_system.multi_turn_rollout import TrajectoryCollector, adjust_batch
 
@@ -471,7 +472,7 @@ def compute_advantage(data: DataProto, adv_estimator, gamma=1.0, lam=1.0, num_re
         terminal_outcomes = _get_data_field(data, "trajectory_success_rate", None)
         if terminal_outcomes is None:
             terminal_outcomes = _get_data_field(data, "episode_rewards", None)
-        advantages, returns, trca_metrics = core_trca.compute_trca_advantage(
+        advantages, returns, trca_metrics = trca_advantage.compute_trca_advantage(
             response_mask=action_mask,
             uid=data.non_tensor_batch["uid"],
             traj_uid=data.non_tensor_batch["traj_uid"],

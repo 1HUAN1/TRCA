@@ -576,14 +576,12 @@ class TrajectoryCollector:
         reward_method = str(getattr(self.config, "reward_method", "rewardflow") or "rewardflow").lower()
         fcsr_reward_metrics = {}
         if is_train and reward_method != "rewardflow":
-            from rewardflow.core_rewardflow import apply_rewardflow_propagation
+            from reward_methods.rollout import apply_configured_rewards
 
-            total_batch_list, fcsr_reward_metrics = apply_rewardflow_propagation(
+            total_batch_list, fcsr_reward_metrics = apply_configured_rewards(
                 total_batch_list=total_batch_list,
                 config=self.config,
                 tokenizer=self.tokenizer,
-                envs=envs,
-                return_metrics=True,
             )
 
         # Create trajectory data

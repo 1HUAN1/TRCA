@@ -7,9 +7,9 @@ import numpy as np
 import pytest
 import torch
 
-from gigpo.core_trca import compute_trca_advantage
 from reward_methods.schema import StepRecord, TrajectoryRecord
 from trca.action_mask import action_token_mask
+from trca.advantage import compute_trca_advantage
 from trca.api_generate import generate_library
 from trca.binding import bind_task
 from trca.evaluator import evaluate_operator

@@ -71,10 +71,10 @@ TRCA_code/
 |   |-- facts.py                     # observable transition adapters
 |   |-- evaluator.py                 # deterministic Boolean evaluation
 |   |-- rewards.py                   # Foundational/Breakthrough/fusion
-|   `-- action_mask.py               # action/search/answer token masks
-|-- gigpo/
-|   `-- core_trca.py                 # return and two-part Advantage
-|-- reward_methods/                  # reward routing and legacy baselines
+|   |-- action_mask.py               # action/search/answer token masks
+|   `-- advantage.py                 # return and two-part Advantage
+|-- gigpo/                           # retained GiGPO/FCSR-GiGPO baselines
+|-- reward_methods/                  # reward routing and rollout adapter
 |-- agent_system/                    # multi-turn rollout and environments
 |-- verl/                            # trainer integration
 |-- examples/
