@@ -9,7 +9,8 @@
 </div>
 
 ## Introduction
-<img width="1198" height="571" alt="image" src="https://github.com/user-attachments/assets/f7955098-2448-4fe0-8304-9efc64e7103a" />
+![Uploading image.png…]()
+
 
 
 **TRCA** provides transition-level credit for long-horizon LLM agents while preserving the original sparse task outcome. It uses one shared, benchmark-level Rubric library whose operators are generated once before training, grounded to each task by a deterministic binder, and evaluated during training without an online LLM judge.
