@@ -16,7 +16,6 @@
 import numpy as np
 import torch
 from collections import defaultdict, Counter
-from verl import DataProto
 import uuid
 
 from difflib import SequenceMatcher
@@ -84,7 +83,7 @@ def are_similar(a: str, b: str, threshold: float = 0.95) -> bool:
         raise ValueError("Only text-based observations are supported for similarity-based GiGPO in this version.")
     return SequenceMatcher(None, a, b).ratio() >= threshold
 
-def compute_step_discounted_returns(batch: DataProto, gamma: float):
+def compute_step_discounted_returns(batch: Any, gamma: float):
     """
     Compute discounted returns for each trajectory. (Eq. 5 in the paper)
     
@@ -382,4 +381,3 @@ def step_norm_reward(step_rewards: torch.Tensor,
         step_advantages = scores.unsqueeze(-1).tile([1, response_length]) * response_mask
     
     return step_advantages
-
