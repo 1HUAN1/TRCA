@@ -203,28 +203,20 @@ The checked release candidate passes 34 focused tests. The tests cover:
 
 Real Qwen2.5 tokenizer probes also cover newline-delimited actions and action-like text inside `<think>`.
 
-## Release Status
-
-| Item | Status |
-| --- | --- |
-| Core TRCA reward and Advantage path | Implemented |
-| Action-only multi-turn loss wiring | Implemented |
-| Focused CPU regression suite | 34 passed |
-| Three API-generated Rubric JSON files | Not generated in this source copy |
-| Real ALFWorld/WebShop/SearchQA smoke updates | Required |
-| Result-level paper reproduction | Required |
-
-Before making a result-level reproducibility claim, generate and review the three Rubric libraries, run one real optimizer update per benchmark, validate the environment fact adapters with captured transitions, and rerun every reported result. See [`TRCA_MINIMAL_ALIGNMENT_CHECKLIST.md`](TRCA_MINIMAL_ALIGNMENT_CHECKLIST.md) for the ordered release gates.
 
 ## Citation
 
 If you use this code, please cite:
 
 ```bibtex
-@misc{zhang2026trca,
-  title  = {TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents},
-  author = {Huan Zhang and Mingju Chen and Dongxu Zhou and Can Lv and Heng Chang and Sen Cui and Faguo Wu and Shiji Zhou},
-  year   = {2026}
+@misc{zhang2026trcatransitionwiserubriccredit,
+      title={TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents}, 
+      author={Huan Zhang and Mingju Chen and Dongxu Zhou and Can Lv and Heng Chang and Sen Cui and Faguo Wu and Shiji Zhou},
+      year={2026},
+      eprint={2608.16156},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2608.16156}, 
 }
 ```
 
