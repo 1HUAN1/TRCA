@@ -12,6 +12,20 @@
 <img width="2883" height="1362" alt="image" src="https://github.com/user-attachments/assets/b73e2e56-16d3-4868-9309-0774ba988571" />
 
 
+TRCA adopts a global Rubric framework consisting of three dimensions: **Evidence**, **Invalidity**, and **Execution**. Before policy training, we use **GPT-5.6-sol** to instantiate this framework into a benchmark-specific Rubric library for each of ALFWorld, WebShop, and SearchQA.
+
+For each benchmark, the model generates **15 reusable Rubric operators**, comprising five operators for each dimension. Generation is performed offline, once per benchmark, and the resulting library is fixed and shared across all task instances throughout training.
+
+During training, a deterministic task binder instantiates the benchmark-level operators using task-specific information extracted from the task instruction and observable environment metadata. Each bound operator then evaluates individual action-induced transitions through deterministic Boolean conditions.
+
+Based on these Rubric judgments, TRCA constructs two complementary reward components:
+
+- **Foundational Rubric Reward (FRR)** aggregates signed scores across Evidence, Invalidity, and Execution to assess local transition quality, rewarding beneficial actions while penalizing invalid or redundant behavior.
+- **Breakthrough Rubric Reward (BRR)** tracks the cumulative coverage of positive Evidence and Execution conditions, rewarding newly established task progress when these conditions are satisfied for the first time within a trajectory.
+
+The two components are fused into a transition-level reward signal. Together with terminal task outcomes, these rewards capture local step quality, incremental progress, and final task completion, providing fine-grained step-level advantages for policy optimization.
+
+**No LLM-based Rubric generation or judgment is performed during trajectory collection or policy optimization.**
 
 **TRCA** provides transition-level credit for long-horizon LLM agents while preserving the original sparse task outcome. It uses one shared, benchmark-level Rubric library whose operators are generated once before training, grounded to each task by a deterministic binder, and evaluated during training without an online LLM judge.
 
